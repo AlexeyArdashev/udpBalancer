@@ -1,0 +1,9 @@
+
+ip=127.0.0.1
+port=3435
+limit=10
+count_nodes=2
+node1_ip=127.0.0.1
+node1_port=3436
+node2_ip=127.0.0.1
+node2_port=3437
