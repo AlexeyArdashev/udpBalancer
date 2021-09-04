@@ -20,6 +20,9 @@ const string NODE = "node";
 const string COUNT_NODE = "count_nodes";
 const string LIMIT = "limit";
 
+namespace {
+const char* DEFAULT_NAME_FILE_CONFIG = "config.txt";
+}
 /*
  * проверка корректности файла конфигурации выполнена не полностью
  *
@@ -56,8 +59,13 @@ pair<string, string> split ( const string &s, const char delim ) {
 }
 
 ConfigReader::ConfigReader( const string& nameFile )
-{
-    std::ifstream fin( nameFile );
+{    
+    std::ifstream fin;
+    if ( nameFile.empty() )
+        fin.open(DEFAULT_NAME_FILE_CONFIG);
+    else
+       fin.open(nameFile);
+
     if ( !fin.is_open() ) {
         string msg;
         msg += "Config file '";

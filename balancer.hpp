@@ -9,7 +9,7 @@
 class Balancer
 {
 public:
-    Balancer();
+    explicit Balancer( const std::string& fileName );
     void start();
 
 private:

@@ -13,11 +13,12 @@ void ipIntDecomposeToByte(unsigned int ip, std::array <uint8_t, 4>& bytes )
 }
 
 UdpSocket::UdpSocket( uint32_t ip, uint16_t port ) :
-    _descrSocket (-1), _paramSocket( new  sockaddr_in )
+    _descrSocket (-1)
 {
-    _paramSocket->sin_family = AF_INET;
-    _paramSocket->sin_port = htons( port );
-    _paramSocket->sin_addr.s_addr = htonl( ip );
+    sockaddr_in paramSocket;
+    paramSocket.sin_family = AF_INET;
+    paramSocket.sin_port = htons( port );
+    paramSocket.sin_addr.s_addr = htonl( ip );
     _descrSocket = socket(AF_INET, SOCK_DGRAM, 0);
 
     if(_descrSocket < 0 )
@@ -25,7 +26,7 @@ UdpSocket::UdpSocket( uint32_t ip, uint16_t port ) :
         std::cout << "socket\n";
         exit(1);
     }
-    if( bind( _descrSocket, (struct sockaddr *)_paramSocket.get(), sizeof(*(_paramSocket.get())) ) < 0 )
+    if( bind( _descrSocket, (struct sockaddr *)&paramSocket, sizeof(paramSocket) ) < 0 )
     {
         std::string msg = "socket not bind to ";
         std::array <uint8_t, 4> bytes;

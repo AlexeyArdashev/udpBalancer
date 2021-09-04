@@ -2,12 +2,9 @@
 
 #include <iostream>
 
-namespace {
-const char* NAME_FILE_CONFIG = "config.txt";
-}
 
-Balancer::Balancer() :
-    _config( new ConfigReader(NAME_FILE_CONFIG) ),
+Balancer::Balancer(const std::string &fileName) :
+    _config( new ConfigReader( fileName ) ),
     _socket( new UdpSocket (_config->getIpBalancer(), _config->getPortBalancer()) ),
     _limiter( new Limiter ( _config->getLimitDatagram() ) )
 {

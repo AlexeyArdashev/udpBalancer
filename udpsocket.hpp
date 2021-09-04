@@ -3,8 +3,6 @@
 #include <stdint.h>
 #include <array>
 #include <vector>
-#include <memory>
-#include <netinet/in.h>
 
 class UdpSocket
 {
@@ -17,5 +15,4 @@ public:
 
 private:
     int _descrSocket;
-    std::unique_ptr<sockaddr_in> _paramSocket;
 };
